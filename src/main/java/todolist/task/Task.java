@@ -1,4 +1,4 @@
-package todolist;
+package todolist.task;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

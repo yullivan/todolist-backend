@@ -1,4 +1,4 @@
-package todolist;
+package todolist.task;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

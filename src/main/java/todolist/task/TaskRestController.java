@@ -1,4 +1,4 @@
-package todolist;
+package todolist.task;
 
 import org.springframework.web.bind.annotation.*;
 

@@ -29,6 +29,11 @@ public class TaskRestController {
         taskService.update(id, request);
     }
 
+    @PatchMapping("/tasks/{id}")
+    void flip(@PathVariable Long id) {
+        taskService.flip(id);
+    }
+
     @DeleteMapping("/tasks/{id}")
     void delete(@PathVariable Long id) {
         taskService.delete(id);

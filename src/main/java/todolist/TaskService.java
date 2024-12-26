@@ -23,7 +23,8 @@ public class TaskService {
                 .stream()
                 .map(task -> new TaskResponse(
                         task.getId(),
-                        task.getTitle()))
+                        task.getTitle(),
+                        task.isCompleted()))
                 .toList();
     }
 
@@ -35,5 +36,11 @@ public class TaskService {
     public void update(Long id, UpdateTaskRequest request) {
         Task task = taskRepository.findById(id).orElseThrow();
         task.setTitle(request.title());
+    }
+
+    @Transactional
+    public void flip(Long id) {
+        Task task = taskRepository.findById(id).orElseThrow();
+        task.flip();
     }
 }

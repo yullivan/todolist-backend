@@ -1,9 +1,7 @@
 package todolist.task;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+import todolist.list.TodoList;
 
 @Entity
 public class Task {
@@ -16,11 +14,15 @@ public class Task {
 
     private boolean isCompleted = false;
 
+    @ManyToOne
+    private TodoList todoList;
+
     protected Task() {
     }
 
-    public Task(String title) {
+    public Task(String title, TodoList todoList) {
         this.title = title;
+        this.todoList = todoList;
     }
 
     public Long getId() {

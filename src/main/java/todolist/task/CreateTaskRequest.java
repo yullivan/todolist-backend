@@ -1,6 +1,7 @@
 package todolist.task;
 
 public record CreateTaskRequest(
-        String title
+        String title,
+        Long listId
 ) {
 }

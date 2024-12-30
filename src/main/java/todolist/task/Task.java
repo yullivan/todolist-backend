@@ -44,4 +44,9 @@ public class Task {
     public void flip() {
         this.isCompleted = !this.isCompleted;
     }
+
+    public void changeTitleAndList(String title, TodoList todoList) {
+        this.title = title;
+        this.todoList = todoList;
+    }
 }

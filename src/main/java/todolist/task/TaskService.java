@@ -56,8 +56,11 @@ public class TaskService {
 
     @Transactional
     public void update(Long id, UpdateTaskRequest request) {
-        Task task = taskRepository.findById(id).orElseThrow();
-        task.setTitle(request.title());
+        TodoList todoList = todoListRepository.findById(request.listId())
+                .orElseThrow();
+        Task task = taskRepository.findById(id)
+                .orElseThrow();
+        task.changeTitleAndList(request.title(), todoList);
     }
 
     @Transactional

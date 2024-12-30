@@ -29,14 +29,25 @@ public class TaskService {
         taskRepository.save(new Task(request.title(), todoList));
     }
 
-    public List<TaskResponse> findAll() {
-        return taskRepository.findAll()
+    public List<TaskResponse> findAllByCompleted(Boolean isCompleted) {
+        if (isCompleted == null) {
+            return taskRepository.findAll()
+                    .stream()
+                    .map(task -> new TaskResponse(
+                            task.getId(),
+                            task.getTitle(),
+                            task.isCompleted()))
+                    .toList();
+        }
+
+        return taskRepository.findByIsCompleted(isCompleted)
                 .stream()
                 .map(task -> new TaskResponse(
                         task.getId(),
                         task.getTitle(),
                         task.isCompleted()))
                 .toList();
+
     }
 
     public void delete(Long id) {

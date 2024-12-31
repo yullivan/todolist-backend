@@ -1,18 +1,12 @@
 package todolist.list;
 
-import todolist.task.Task;
+import todolist.task.TaskResponse;
 
 import java.util.List;
 
 public record TodoListDetailResponse(
         Long listId,
         String title,
-        List<Task> tasks
+        List<TaskResponse> tasks
 ) {
-    record Task(
-            Long id,
-            String content,
-            boolean isCompleted
-    ) {
-    }
 }

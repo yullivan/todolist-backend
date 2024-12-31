@@ -28,6 +28,6 @@ public class TodoListRestController {
     // 리스트 상세 조회
     @GetMapping("/lists/{listId}")
     TodoListDetailResponse findById(@PathVariable Long listId) {
-        return null;
+        return todoListService.findById(listId);
     }
 }

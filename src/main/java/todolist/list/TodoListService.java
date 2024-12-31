@@ -1,7 +1,9 @@
 package todolist.list;
 
 import org.springframework.stereotype.Service;
+import todolist.task.Task;
 import todolist.task.TaskRepository;
+import todolist.task.TaskResponse;
 
 import java.util.List;
 
@@ -28,5 +30,21 @@ public class TodoListService {
                         list.getTitle(),
                         taskRepository.countByTodoList(list)))
                 .toList();
+    }
+
+    public TodoListDetailResponse findById(Long listId) {
+        TodoList todoList = todoListRepository.findById(listId)
+                .orElseThrow();
+        List<Task> tasks = taskRepository.findByTodoList(todoList);
+        return new TodoListDetailResponse(
+                todoList.getId(),
+                todoList.getTitle(),
+                tasks.stream()
+                        .map(task -> new TaskResponse(
+                                task.getId(),
+                                task.getTitle(),
+                                task.isCompleted()))
+                        .toList()
+        );
     }
 }

@@ -30,4 +30,9 @@ public class TodoListRestController {
     TodoListDetailResponse findById(@PathVariable Long listId) {
         return todoListService.findById(listId);
     }
+
+    @DeleteMapping("/lists/{listId}")
+    public void deleteById(@PathVariable Long listId) {
+        todoListService.deleteById(listId);
+    }
 }

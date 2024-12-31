@@ -1,6 +1,7 @@
 package todolist.list;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import todolist.task.Task;
 import todolist.task.TaskRepository;
 import todolist.task.TaskResponse;
@@ -46,5 +47,18 @@ public class TodoListService {
                                 task.isCompleted()))
                         .toList()
         );
+    }
+
+    @Transactional
+    public void deleteById(Long listId) {
+        TodoList todoList = todoListRepository.findById(listId)
+                .orElseThrow();
+//        List<Task> tasks = taskRepository.findByTodoList(todoList);
+//        for (Task task : tasks) {
+//            taskRepository.deleteById(task.getId());
+//        }
+        taskRepository.deleteAllByTodoList(todoList);
+        todoListRepository.delete(todoList);
+
     }
 }

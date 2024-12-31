@@ -13,4 +13,6 @@ public interface TaskRepository extends JpaRepository<Task, Long> {
     int countByTodoList(TodoList todoList);
 
     List<Task> findByTodoList(TodoList todoList);
+
+    void deleteAllByTodoList(TodoList todoList);
 }

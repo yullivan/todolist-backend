@@ -29,7 +29,17 @@ public class TaskService {
         taskRepository.save(new Task(request.title(), todoList));
     }
 
-    public List<TaskResponse> findAllByCompleted(Boolean isCompleted) {
+    public List<TaskResponse> findAllByCompleted(Boolean isCompleted, String keyword) {
+        if (keyword != null) {
+            return taskRepository.findByTitleContaining(keyword)
+                    .stream()
+                    .map(task -> new TaskResponse(
+                            task.getId(),
+                            task.getTitle(),
+                            task.isCompleted()))
+                    .toList();
+        }
+
         if (isCompleted == null) {
             return taskRepository.findAll()
                     .stream()

@@ -21,8 +21,9 @@ public class TaskRestController {
     // 여러 개의 할 일 조회
     @GetMapping("/tasks")
     List<TaskResponse> findAll(
-            @RequestParam(required = false) Boolean isCompleted) {
-        return taskService.findAllByCompleted(isCompleted);
+            @RequestParam(required = false) Boolean isCompleted,
+            @RequestParam(required = false) String keyword) {
+        return taskService.findAllByCompleted(isCompleted, keyword);
     }
 
     @PutMapping("/tasks/{id}")

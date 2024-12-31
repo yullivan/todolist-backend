@@ -15,4 +15,7 @@ public interface TaskRepository extends JpaRepository<Task, Long> {
     List<Task> findByTodoList(TodoList todoList);
 
     void deleteAllByTodoList(TodoList todoList);
+
+    // 제목에 특정 문자열이 포함된 task 검색
+    List<Task> findByTitleContaining(String keyword);
 }

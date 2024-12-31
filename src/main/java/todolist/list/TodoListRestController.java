@@ -1,9 +1,6 @@
 package todolist.list;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -16,13 +13,21 @@ public class TodoListRestController {
         this.todoListService = todoListService;
     }
 
+    // 리스트 생성
     @PostMapping("/lists")
     void create(@RequestBody CreateListRequest request) {
         todoListService.create(request);
     }
 
+    // 리스트 목록 조회
     @GetMapping("/lists")
-    List<TodoListResponse> read() {
+    List<TodoListResponse> findAll() {
         return todoListService.findAll();
+    }
+    
+    // 리스트 상세 조회
+    @GetMapping("/lists/{listId}")
+    TodoListDetailResponse findById(@PathVariable Long listId) {
+        return null;
     }
 }

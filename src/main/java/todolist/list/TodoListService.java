@@ -1,6 +1,7 @@
 package todolist.list;
 
 import org.springframework.stereotype.Service;
+import todolist.task.TaskRepository;
 
 import java.util.List;
 
@@ -8,9 +9,11 @@ import java.util.List;
 public class TodoListService {
 
     private final TodoListRepository todoListRepository;
+    private final TaskRepository taskRepository;
 
-    public TodoListService(TodoListRepository todoListRepository) {
+    public TodoListService(TodoListRepository todoListRepository, TaskRepository taskRepository) {
         this.todoListRepository = todoListRepository;
+        this.taskRepository = taskRepository;
     }
 
     public void create(CreateListRequest request) {
@@ -20,7 +23,10 @@ public class TodoListService {
     public List<TodoListResponse> findAll() {
         return todoListRepository.findAll()
                 .stream()
-                .map(list -> new TodoListResponse(list.getId(), list.getTitle()))
+                .map(list -> new TodoListResponse(
+                        list.getId(),
+                        list.getTitle(),
+                        taskRepository.countByTodoList(list)))
                 .toList();
     }
 }
